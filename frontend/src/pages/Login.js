@@ -5,20 +5,47 @@ import loginIcons from "../assest/signin.gif";
 
 const Login = () => {
   const [showPassword, setshowPassword] = useState(false);
+  const [data, setData] = useState({
+    email: "",
+    password: ""
+  })
+
+  const handleOnChange = (e) => {
+      const { name, value } = e.target
+
+      setData((preve) => {
+        return {
+          ...preve,
+          [name] : value
+        }
+      })
+  }
+
+  const handleSubmit = (e) => {
+    // e.preventDefault()
+  }
+  
+  console.log("Data loging", data);
+
+  
+
   return (
     <section id="login">
       <div className="mx-auto container p-4">
-        <div className="bg-white p-2 py-5 w-full max-w-sm mx-auto">
+        <div className="bg-white p-5 w-full max-w-sm mx-auto">
           <div className="w-20 h-20 mx-auto">
             <img src={loginIcons} alt="login icon" srcset="" />
           </div>
-          <form className="pt-6">
+          <form className="pt-6" onSubmit={handleSubmit}>
             <div className="grid">
               <label htmlFor="">Email : </label>
               <div className="bg-slate-200 p-3">
                 <input
                   type="email"
                   placeholder="Enter your email"
+                  name='email'
+                  value={data.email}
+                  onChange={handleOnChange}
                   className="w-full h-full outline-none bg-transparent"
                 />
               </div>
@@ -29,6 +56,9 @@ const Login = () => {
                 <input
                   type={showPassword ? "text" : "password"}
                   placeholder="Enter your password"
+                  name='password'
+                  value={data.password}
+                  onChange={handleOnChange}
                   className="w-full h-full outline-none bg-transparent"
                 />
                 <div
@@ -49,6 +79,7 @@ const Login = () => {
               Login
             </button>
           </form>
+          <p className="py-4">Don't have account ? <Link to={'/sign-up'} className="text-red-600 hover:text-red-900 hover:underline">Sign Up</Link></p>
         </div>
       </div>
     </section>
